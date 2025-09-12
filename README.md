@@ -35,14 +35,25 @@ This project organizes data into layered tables for quality, governance, and sca
 ### Example: DimProducts Flow
 ![DimProducts Pipeline](diagrams/dlt_dim_products.png)
 
+
+
 ### Simplified Flow
-```mermaid
 flowchart LR
-  Raw[(Raw Data)] --> Bronze[Bronze Layer]
-  Bronze --> Silver_Customers[Silver Customers]
-  Bronze --> Silver_Orders[Silver Orders]
-  Bronze --> Silver_Products[Silver Products]
-  Bronze --> Silver_Regions[Silver Regions]
-  Silver_Customers --> Gold_Customers[Gold Dim Customers (SCD2)]
-  Silver_Products --> Gold_Products[Gold Dim Products]
-  Silver_Orders --> Gold_Orders[Gold Fact Orders]
+  raw((Raw Data))
+  bronze[Bronze Layer]
+  silverCustomers[Silver Customers]
+  silverOrders[Silver Orders]
+  silverProducts[Silver Products]
+  silverRegions[Silver Regions]
+  goldCustomers[Gold Dim Customers - SCD2]
+  goldProducts[Gold Dim Products]
+  goldOrders[Gold Fact Orders]
+
+  raw --> bronze
+  bronze --> silverCustomers
+  bronze --> silverOrders
+  bronze --> silverProducts
+  bronze --> silverRegions
+  silverCustomers --> goldCustomers
+  silverProducts --> goldProducts
+  silverOrders --> goldOrders
